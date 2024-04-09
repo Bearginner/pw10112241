@@ -52,19 +52,29 @@ section {
     /* border: 1px solid red; */
 }
 
-section nav ul li,
-article ul li {
+section nav ul li, article ul li {
     list-style-type: none;
-    margin-right: 50px;
+}
+
+ul{
+    margin: 0px;
+    padding: 0px;
 }
 
 #PanelLink {
     background: var(--color-azulfuerte);
+    height: 47%;
+    padding: 50px;
 }
 
 #PanelLink img {
     height: 48%;
     width: 250px;
+}
+
+#PanelProgress{
+    height: 47%;
+    margin-top: 20px;
 }
 
 #PanelProgress img {
@@ -73,7 +83,7 @@ article ul li {
 }
 
 #megaseccion {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 73%;
     float: right;
     overflow: hidden;
