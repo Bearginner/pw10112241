@@ -1,0 +1,16 @@
+html{
+    --color-marino: #1f2938;
+    --color-azul: #1d4ed8;
+    --color-gris: #606875;
+    --color-grisoscuro: #384152;
+    --color-grisclaro: #6c737e;
+    --color-blanco: white;
+}
+body{
+    font-size: 16px;
+    margin: 0 auto;
+    max-width: 1024px;
+}
+header{
+    
+}
