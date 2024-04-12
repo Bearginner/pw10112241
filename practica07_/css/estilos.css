@@ -10,7 +10,24 @@ body{
     font-size: 16px;
     margin: 0 auto;
     max-width: 1024px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 header{
-    
+    background-color: var(--color-marino);
+}
+
+header img{
+    vertical-align: middle;
+    width: 5%;
+}
+
+nav img{
+    display: inline-block;
+}
+
+nav ul li{
+    display: inline-block;
+    color: white;
+    margin: 10px;
+    font-size: 0.8em;
 }
