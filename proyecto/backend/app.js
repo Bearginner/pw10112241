@@ -82,6 +82,23 @@ app.post('/api/clientes', (req, res) => {
     })
 });
 
+// Actualizar cliente
+app.put('/api/clientes/:id', (req, res) => {
+    let id = req.params.id;
+    let nombre = req.body.nombre;
+    let direccion = req.body.direccion;
+    let telefono = req.body.telefono;
+    let rfc = req.body.rfc;
+    let sql = "Update clientes Set nombre = ?, direccion = ?, telefono = ?, rfc = ? Where id = ?";
+    conexion.query(sql, [nombre, direccion, telefono, rfc, id], (error, resultado) =>{
+        if(error){
+            throw error;
+        } else {
+            res.send(resultado);
+        }
+    });
+});
+
 // Encender el server
 let puerto = 3000;
 app.listen(puerto, function(){
