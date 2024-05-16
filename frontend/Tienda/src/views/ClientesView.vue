@@ -18,7 +18,7 @@
                         <th> RFC </th>
                         <th> Acciones</th>
                     </thead>
-                    <tbody v-if="clientes.lenght > 0">
+                    <tbody v-if="clientes.length > 0">
                         <tr v-for="(cliente, index) in clientes" :key="index">
                             <td> {{ cliente.id }}</td>
                             <td> {{ cliente.nombre }}</td>

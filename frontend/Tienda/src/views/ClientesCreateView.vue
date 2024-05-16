@@ -3,6 +3,9 @@
         <div class="card">
             <div class="card-header">
                 <h4> Agregar cliente</h4>
+                <div v-if="mensaje == 1" class="alert alert-success" role="alert">
+                    Datos guardados con exito
+                </div>
             </div>
             <div class="card-body">
                 <div class="mb-3">
@@ -26,7 +29,7 @@
                     <input type="text" class="form-control" v-model="model.cliente.RFC">
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-primary"> Guardar</button>
+                    <button class="btn btn-primary" @click="GuardarCliente()"> Guardar </button>
                 </div>
             </div>
         </div>
@@ -34,19 +37,41 @@
 </template>
 
 <script>
-export default{
+import axios from 'axios';
+export default {
     name: "ClientesCreate",
-    data(){
-        return{
-            model:{
-                cliente:{
+    data() {
+        return {
+            mensaje: 0,
+            model: {
+                cliente: {
                     id: '',
                     nombre: '',
                     direccion: '',
                     telefono: '',
-                    RFC: ''
+                    rfc: ''
                 }
             }
+        }
+    },
+    methods: {
+        GuardarCliente() {
+            axios.post('http://localhost:3000/api/clientes', this.model.cliente)
+                .then(res => {
+                    //Si insertamos 1 regstro
+                    if (res.data.affectedRows == 1) {
+                        //Limpiamos los textos
+                        this.model.cliente = {
+                            id: '',
+                            nombre: '',
+                            direccion: '',
+                            telefono: '',
+                            rfc: ''
+                        }
+                        //Para que salga el mensaje de exito
+                        this.mensaje = 1;
+                    }
+                })
         }
     }
 }
