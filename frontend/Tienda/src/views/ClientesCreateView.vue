@@ -8,29 +8,36 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="mb-3">
-                    ID
-                    <input type="text" class="form-control" v-model="model.cliente.id">
-                </div>
-                <div class="mb-3">
-                    Nombre
-                    <input type="text" class="form-control" v-model="model.cliente.nombre">
-                </div>
-                <div class="mb-3">
-                    Direccion
-                    <input type="text" class="form-control" v-model="model.cliente.direccion">
-                </div>
-                <div class="mb-3">
-                    Telefono
-                    <input type="text" class="form-control" v-model="model.cliente.telefono">
-                </div>
-                <div class="mb-3">
-                    RFC
-                    <input type="text" class="form-control" v-model="model.cliente.RFC">
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-primary" @click="GuardarCliente()"> Guardar </button>
-                </div>
+                <Form :validation-schema="validationSchema" @submit="onTodoBien">
+                    <div class="mb-3">
+                        ID
+                        <Field name="id" id="id" type="text" class="form-control" v-model="model.cliente.id" />
+                        <ErrorMessage name="id" /> 
+                    </div>
+                    <div class="mb-3">
+                        Nombre
+                        <Field name="nombre" id="nombre" type="text" class="form-control" v-model="model.cliente.nombre" />
+                        <ErrorMessage name="nombre" /> 
+                    </div>
+                    <div class="mb-3">
+                        Direccion
+                        <Field name="direccion" id="direccion" type="text" class="form-control" v-model="model.cliente.direccion" />
+                        <ErrorMessage name="direccion" /> 
+                    </div>
+                    <div class="mb-3">
+                        Telefono
+                        <Field name="telefono" id="telefono" type="text" class="form-control" v-model="model.cliente.telefono" />
+                        <ErrorMessage name="telefono" /> 
+                    </div>
+                    <div class="mb-3">
+                        RFC
+                        <Field name="rfc" id="rfc" type="text" class="form-control" v-model="model.cliente.rfc" />
+                        <ErrorMessage name="rfc" /> 
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary"> Guardar</button>
+                    </div>
+                </Form>
             </div>
         </div>
     </div>
@@ -38,10 +45,24 @@
 
 <script>
 import axios from 'axios';
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/zod';
+import * as zod from 'zod';
 export default {
     name: "ClientesCreate",
+    components: { Field, Form, ErrorMessage },
     data() {
+        const validationSchema = toTypedSchema(
+            zod.object({
+                id: zod.string({message: 'Requerido'}).min(1),
+                nombre: zod.string({message: 'Requerido'}).min(1),
+                direccion: zod.string({message: 'Requerido'}).min(1),
+                telefono: zod.string({message: 'Requerido'}).min(1).max(10),
+                rfc: zod.string({message: 'Requerido'}).min(1)
+            })
+        )
         return {
+            validationSchema,
             mensaje: 0,
             model: {
                 cliente: {
@@ -55,6 +76,9 @@ export default {
         }
     },
     methods: {
+        onTodoBien(){
+            alert('Todo validado');
+        },
         GuardarCliente() {
             axios.post('http://localhost:3000/api/clientes', this.model.cliente)
                 .then(res => {
