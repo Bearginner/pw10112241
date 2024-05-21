@@ -13,18 +13,24 @@
                     <thead>
                         <th> ID</th>
                         <th> Nombre </th>
+                        <!-- <th> Apellidos </th> -->
                         <th> Direccion </th>
                         <th> Telefono </th>
                         <th> RFC </th>
+                       <!--  <th> CURP </th>
+                        <th> CP </th> -->
                         <th> Acciones</th>
                     </thead>
                     <tbody v-if="clientes.length > 0">
                         <tr v-for="(cliente, index) in clientes" :key="index">
                             <td> {{ cliente.id }}</td>
                             <td> {{ cliente.nombre }}</td>
+                            <!-- <td> {{ cliente.apellido }}</td> -->
                             <td> {{ cliente.direccion }}</td>
                             <td> {{ cliente.telefono }}</td>
                             <td> {{ cliente.rfc }}</td>
+                            <!-- <td> {{ cliente.curp }}</td>
+                            <td> {{ cliente.cp }}</td> -->
                             <td> Editar &nbsp; 
                                 <buttton class="btn btn-danger" @click="deleteCliente(cliente.id)"> Borrar</buttton>
                             </td>
